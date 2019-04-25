@@ -2,7 +2,7 @@
 
 This library works similarly to [React Portals](https://reactjs.org/docs/portals.html) and allows you to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 
-**Example:** Demo | Code
+**Example:** [Demo](https://kosmogradsky.github.io/angular-rift-example/) | [Code](https://github.com/kosmogradsky/angular-rift-library/blob/master/projects/angular-rift-example/src/app/app.component.html)
 
 ## Getting started
 
