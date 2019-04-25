@@ -2,6 +2,9 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "cli": {
+    "packageManager": "yarn"
+  },
   "projects": {
     "angular-rift": {
       "root": "projects/angular-rift",
@@ -30,6 +33,110 @@
             "tsConfig": [
               "projects/angular-rift/tsconfig.lib.json",
               "projects/angular-rift/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "angular-rift-example": {
+      "root": "projects/angular-rift-example/",
+      "sourceRoot": "projects/angular-rift-example/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/angular-rift-example",
+            "index": "projects/angular-rift-example/src/index.html",
+            "main": "projects/angular-rift-example/src/main.ts",
+            "polyfills": "projects/angular-rift-example/src/polyfills.ts",
+            "tsConfig": "projects/angular-rift-example/tsconfig.app.json",
+            "assets": [
+              "projects/angular-rift-example/src/favicon.ico",
+              "projects/angular-rift-example/src/assets"
+            ],
+            "styles": [
+              "projects/angular-rift-example/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/angular-rift-example/src/environments/environment.ts",
+                  "with": "projects/angular-rift-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular-rift-example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-rift-example:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-rift-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-rift-example/src/test.ts",
+            "polyfills": "projects/angular-rift-example/src/polyfills.ts",
+            "tsConfig": "projects/angular-rift-example/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-rift-example/karma.conf.js",
+            "styles": [
+              "projects/angular-rift-example/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/angular-rift-example/src/favicon.ico",
+              "projects/angular-rift-example/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-rift-example/tsconfig.app.json",
+              "projects/angular-rift-example/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

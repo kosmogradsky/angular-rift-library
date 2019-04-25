@@ -1,7 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-interface Rift {
+export interface Rift {
   template: TemplateRef<unknown>;
   zIndex: number;
 }
