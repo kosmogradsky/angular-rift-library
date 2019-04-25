@@ -5,22 +5,37 @@ export interface Rift {
   template: TemplateRef<unknown>;
 }
 
+export const defaultOutletName = 'default';
+
 @Injectable()
 export class RiftService {
-  private createdRiftsSubject: BehaviorSubject<Rift[]> = new BehaviorSubject([] as Rift[]);
-  readonly createdRifts: Observable<Rift[]> = this.createdRiftsSubject.asObservable();
+  private createdRiftsSubject: BehaviorSubject<Record<string, Rift[] | undefined>> = new BehaviorSubject({});
+  readonly createdRifts: Observable<Record<string, Rift[] | undefined>> = this.createdRiftsSubject.asObservable();
 
   constructor() { }
 
-  attach(template: TemplateRef<unknown>) {
-    this.createdRiftsSubject.next(this.createdRiftsSubject.getValue().concat({
-      template
-    }));
+  attach(template: TemplateRef<unknown>, outletName = defaultOutletName) {
+    const riftsBefore = this.createdRiftsSubject.getValue();
+    const riftsInThatOutlet = riftsBefore[outletName] || [];
+
+    this.createdRiftsSubject.next({
+      ...riftsBefore,
+      [outletName]: [
+        ...riftsInThatOutlet,
+        { template }
+      ]
+    });
   }
 
-  detach(templateToDetach: TemplateRef<any>) {
-    this.createdRiftsSubject.next(
-      this.createdRiftsSubject.getValue().filter(rift => rift.template !== templateToDetach)
-    );
+  detach(templateToDetach: TemplateRef<any>, outletName = defaultOutletName) {
+    const riftsBefore = this.createdRiftsSubject.getValue();
+    const riftsInThatOutlet = riftsBefore[outletName];
+
+    if (riftsInThatOutlet) {
+      this.createdRiftsSubject.next({
+        ...riftsBefore,
+        [outletName]: riftsInThatOutlet.filter(rift => rift.template !== templateToDetach)
+      });
+    }
   }
 }

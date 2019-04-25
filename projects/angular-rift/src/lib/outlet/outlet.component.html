@@ -1,3 +1,5 @@
-<ng-container *ngFor="let rift of (rift$ | async)">
-  <ng-container *ngTemplateOutlet="rift.template"></ng-container>
+<ng-container *ngIf="rift$ | async as rifts">
+  <ng-container *ngFor="let rift of (rifts[name] || [])">
+    <ng-container *ngTemplateOutlet="rift.template"></ng-container>
+  </ng-container>
 </ng-container>

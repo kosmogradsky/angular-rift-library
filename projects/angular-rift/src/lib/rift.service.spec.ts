@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { skip } from 'rxjs/operators';
+import { skip, take } from 'rxjs/operators';
 
-import { RiftService } from './rift.service';
+import { RiftService, defaultOutletName } from './rift.service';
 import { TemplateRef } from '@angular/core';
 
 describe('RiftService', () => {
@@ -16,28 +16,65 @@ describe('RiftService', () => {
 
   it('should correctly attach', done => {
     const service: RiftService = TestBed.get(RiftService);
-    const createdRiftsSubscription = service.createdRifts.pipe(skip(1)).subscribe(rifts => {
-      expect(rifts).toEqual([{ template: {} as TemplateRef<unknown> }]);
-      createdRiftsSubscription.unsubscribe();
+    const template = {} as TemplateRef<unknown>;
+
+    service.createdRifts.pipe(skip(1), take(1)).subscribe(rifts => {
+      expect(rifts).toEqual({
+        [defaultOutletName]: [
+          { template }
+        ]
+      });
+    });
+
+    service.createdRifts.pipe(skip(2), take(1)).subscribe(rifts => {
+      expect(rifts).toEqual({
+        [defaultOutletName]: [
+          { template },
+          { template }
+        ]
+      });
+    });
+
+    service.createdRifts.pipe(skip(3), take(1)).subscribe(rifts => {
+      expect(rifts).toEqual({
+        [defaultOutletName]: [
+          { template },
+          { template }
+        ],
+        myOutlet: [
+          { template }
+        ]
+      });
       done();
     });
 
-    service.attach({} as TemplateRef<unknown>);
+    service.attach(template);
+    service.attach(template);
+    service.attach(template, 'myOutlet');
   });
 
   it('should correctly detach', done => {
-    const template1 = {} as TemplateRef<unknown>;
-    const template2 = {} as TemplateRef<unknown>;
-
+    const template = {} as TemplateRef<unknown>;
     const service: RiftService = TestBed.get(RiftService);
-    const createdRiftsSubscription = service.createdRifts.pipe(skip(3)).subscribe(rifts => {
-      expect(rifts).toEqual([{ template: template2 }]);
-      createdRiftsSubscription.unsubscribe();
+
+    service.createdRifts.pipe(skip(3), take(1)).subscribe(rifts => {
+      expect(rifts).toEqual({
+        [defaultOutletName]: [],
+        myOutlet: [{ template }]
+      });
+    });
+
+    service.createdRifts.pipe(skip(4), take(1)).subscribe(rifts => {
+      expect(rifts).toEqual({
+        [defaultOutletName]: [],
+        myOutlet: []
+      });
       done();
     });
 
-    service.attach(template1);
-    service.attach(template2);
-    service.detach(template1);
+    service.attach(template);
+    service.attach(template, 'myOutlet');
+    service.detach(template);
+    service.detach(template, 'myOutlet');
   });
 });
