@@ -2,6 +2,7 @@
  * Public API Surface of angular-rift
  */
 
-export * from './lib/angular-rift.service';
-export * from './lib/angular-rift.component';
-export * from './lib/angular-rift.module';
+export * from './lib/rift.service';
+export * from './lib/rift.module';
+export * from './lib/content.directive';
+export * from './lib/outlet/outlet.component';
