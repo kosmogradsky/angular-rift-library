@@ -17,7 +17,7 @@ describe('RiftService', () => {
   it('should correctly attach', done => {
     const service: RiftService = TestBed.get(RiftService);
     const createdRiftsSubscription = service.createdRifts.pipe(skip(1)).subscribe(rifts => {
-      expect(rifts).toEqual([{ template: {} as TemplateRef<unknown>, zIndex: 1000 }]);
+      expect(rifts).toEqual([{ template: {} as TemplateRef<unknown> }]);
       createdRiftsSubscription.unsubscribe();
       done();
     });
@@ -31,7 +31,7 @@ describe('RiftService', () => {
 
     const service: RiftService = TestBed.get(RiftService);
     const createdRiftsSubscription = service.createdRifts.pipe(skip(3)).subscribe(rifts => {
-      expect(rifts).toEqual([{ template: template2, zIndex: 1000 }]);
+      expect(rifts).toEqual([{ template: template2 }]);
       createdRiftsSubscription.unsubscribe();
       done();
     });

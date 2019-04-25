@@ -5,7 +5,7 @@ import { RiftService } from './rift.service';
 
 @Component({
   template: `
-    <ng-template riftContent [zIndex]="2000" *ngIf="isRiftMounted" #template></ng-template>
+    <ng-template riftContent *ngIf="isRiftMounted" #template></ng-template>
   `
 })
 class DummyRiftComponent {
@@ -36,7 +36,7 @@ describe('ContentDirective', () => {
 
     fixture.detectChanges();
     const template = fixture.componentInstance.template;
-    expect(attachSpy).toHaveBeenCalledWith(template, 2000);
+    expect(attachSpy).toHaveBeenCalledWith(template);
 
     fixture.componentInstance.isRiftMounted = false;
     fixture.detectChanges();

@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Rift {
   template: TemplateRef<unknown>;
-  zIndex: number;
 }
 
 @Injectable()
@@ -13,10 +12,9 @@ export class RiftService {
 
   constructor() { }
 
-  attach(template: TemplateRef<unknown>, zIndex = 1000) {
+  attach(template: TemplateRef<unknown>) {
     this.createdRiftsSubject.next(this.createdRiftsSubject.getValue().concat({
-      template,
-      zIndex
+      template
     }));
   }
 

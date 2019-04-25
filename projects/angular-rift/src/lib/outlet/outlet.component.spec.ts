@@ -5,14 +5,14 @@ import { RiftService } from '../rift.service';
 import { TemplateRef, Component, ViewChild } from '@angular/core';
 
 @Component({
-  template: `<ng-template #template></ng-template>`
+  template: `<ng-template #template><div>template1</div></ng-template>`
 })
 class DummyTemplate1Component {
   @ViewChild('template') template!: TemplateRef<unknown>;
 }
 
 @Component({
-  template: `<ng-template #template></ng-template>`
+  template: `<ng-template #template><div>template2</div></ng-template>`
 })
 class DummyTemplate2Component {
   @ViewChild('template') template!: TemplateRef<unknown>;
@@ -46,17 +46,17 @@ describe('OutletComponent', () => {
   it('should contain rifts content', () => {
     const template1 = TestBed.createComponent(DummyTemplate1Component).componentInstance.template;
     const service: RiftService = TestBed.get(RiftService);
-    service.attach(template1, 2000);
+    service.attach(template1);
 
     fixture.detectChanges();
     expect(fixture.nativeElement.children.length).toBe(1);
-    expect(fixture.nativeElement.children[0].style.zIndex).toBe('2000');
+    expect(fixture.nativeElement.children[0].textContent).toBe('template1');
 
     const template2 = TestBed.createComponent(DummyTemplate2Component).componentInstance.template;
     service.attach(template2);
 
     fixture.detectChanges();
     expect(fixture.nativeElement.children.length).toBe(2);
-    expect(fixture.nativeElement.children[1].style.zIndex).toBe('1000');
+    expect(fixture.nativeElement.children[1].textContent).toBe('template2');
   });
 });
