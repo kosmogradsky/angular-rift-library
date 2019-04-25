@@ -20,7 +20,7 @@ npm install angular-rift
     ```
 - Named `riftContent` will appear inside `rift-outlet` with respective name:
     ```html
-    <div *riftContent="'myOutlet'">This will appear inside default rift-outlet!</div>
+    <div *riftContent="'myOutlet'">This will appear inside named rift-outlet!</div>
 
     <rift-outlet name="myOutlet"></rift-outlet>
     ```
