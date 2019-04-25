@@ -1,24 +1,26 @@
-# AngularRift
+# Angular Rift
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+This library works similarly to [React Portals](https://reactjs.org/docs/portals.html) and allows you to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 
-## Code scaffolding
+**Example:** Demo | Code
 
-Run `ng generate component component-name --project angular-rift` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-rift`.
-> Note: Don't forget to add `--project angular-rift` or else it will be added to the default project in your `angular.json` file. 
+## Getting started
 
-## Build
+1. Install it:
+```
+npm install angular-rift
+```
 
-Run `ng build angular-rift` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Use `riftContent` directive and `rift-outlet` component to create rifts:
+- Unnamed `riftContent` will appear inside unnamed `rift-outlet`:
+    ```html
+    <div *riftContent>This will appear inside default rift-outlet!</div>
 
-## Publishing
+    <rift-outlet></rift-outlet>
+    ```
+- Named `riftContent` will appear inside `rift-outlet` with respective name:
+    ```html
+    <div *riftContent="'myOutlet'">This will appear inside default rift-outlet!</div>
 
-After building your library with `ng build angular-rift`, go to the dist folder `cd dist/angular-rift` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test angular-rift` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+    <rift-outlet name="myOutlet"></rift-outlet>
+    ```

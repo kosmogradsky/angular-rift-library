@@ -1,4 +1,4 @@
-# [WIP] Angular Rift
+# Angular Rift
 
 This library works similarly to [React Portals](https://reactjs.org/docs/portals.html) and allows you to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 

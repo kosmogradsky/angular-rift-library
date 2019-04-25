@@ -1,6 +1,27 @@
 {
   "name": "angular-rift",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "React Portal-like technique for Angular",
+  "author": {
+    "name": "Evgenii Kosmogradskii-Ivanov",
+    "email": "kosmogradsky@yandex.ru"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kosmogradsky/angular-rift-library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kosmogradsky/angular-rift-library/issues"
+  },
+  "homepage": "https://github.com/kosmogradsky/angular-rift-library",
+  "keywords": [
+    "angular",
+    "portal",
+    "typescript",
+    "javascript",
+    "directive"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
