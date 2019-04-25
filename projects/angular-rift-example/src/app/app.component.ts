@@ -2,12 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <div>normal div</div>
-    <div *riftContent>rifted div</div>
-
-    <rift-outlet></rift-outlet>
-  `,
+  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {

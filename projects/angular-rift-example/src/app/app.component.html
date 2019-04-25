@@ -1,0 +1,14 @@
+<div>RectangleThree is displayed inside RiftOutlet even though it is defined as a child of RectangeTwo</div>
+
+<div class="rectangle one">
+  <span>RectangleOne</span>
+  <div class="rectangle two">
+    <span>RectangeTwo</span>
+    <div class="rectangle three" *riftContent>RectangleThree</div>
+  </div>
+</div>
+
+<div class="rectangle outlet">
+  <span>RiftOutlet</span>
+  <rift-outlet></rift-outlet>
+</div>
