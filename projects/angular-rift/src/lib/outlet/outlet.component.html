@@ -1,0 +1,6 @@
+<div
+  *ngFor="let rift of (rift$ | async)"
+  [style.z-index]="rift.zIndex"
+>
+  <ng-container *ngTemplateOutlet="rift.template"></ng-container>
+</div>

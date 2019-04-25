@@ -2,5 +2,42 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "angular-rift": {
+      "root": "projects/angular-rift",
+      "sourceRoot": "projects/angular-rift/src",
+      "projectType": "library",
+      "prefix": "rift",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/angular-rift/tsconfig.lib.json",
+            "project": "projects/angular-rift/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-rift/src/test.ts",
+            "tsConfig": "projects/angular-rift/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-rift/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-rift/tsconfig.lib.json",
+              "projects/angular-rift/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular-rift"
 }
